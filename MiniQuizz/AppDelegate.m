@@ -8,25 +8,114 @@
 
 #import "AppDelegate.h"
 
-#import "ViewController.h"
+#import "RootVC.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize viewController = _viewController;
+@synthesize rootvc = _rootvc;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
-    } else {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
-    }
-    self.window.rootViewController = self.viewController;
+    self.rootvc = [[RootVC alloc] initWithNibName:@"RootVC" bundle:nil];
+
+    self.window.rootViewController = self.rootvc;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
++ (void)SwitchVC:(UIViewController *)vc
+{
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    [app.rootvc presentModalViewController:vc animated:NO];
+}
+
++(NSMutableArray *)fillData{
+    NSDictionary *questionDic1 = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                  @"The following function is where all program execution starts in an Objective-C program:",@"question",
+                                  @"begin",@"option1",
+                                  @"application:didFinishLaunchingWithOptions:",@"option2",
+                                  @"shabang",@"option3",
+                                  @"main",@"option4",
+                                  @"4",@"answer", nil];
+    
+    NSDictionary *questionDic2 = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                  @"By convention, a class interface is stored in a file with which extension?",@"question",
+                                  @".h",@"option1",
+                                  @".m",@"option2",
+                                  @".o",@"option3",
+                                  @".c",@"option4",
+                                  @"1",@"answer", nil];
+    
+    NSDictionary *questionDic3 = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                  @"By convention, a class implementation is stored in a file with which extension?",@"question",
+                                  @".h",@"option1",
+                                  @".m",@"option2",
+                                  @".o",@"option3",
+                                  @".c",@"option4",
+                                  @"2",@"answer", nil];
+    
+    NSDictionary *questionDic4 = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                  @"Which of the following are valid comments in Objective-C?",@"question",
+                                  @"--Fix this line later",@"option1",
+                                  @"// Fix this line later",@"option2",
+                                  @"/* Fix this line later */",@"option3",
+                                  @"Both B & C",@"option4",
+                                  @"4",@"answer", nil];
+    
+    NSDictionary *questionDic5 = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                  @"Objective-C makes extensive and intrinsic use of which of the following design patterns:",@"question",
+                                  @"The Factory Method Pattern",@"option1",
+                                  @"The Objective Pattern",@"option2",
+                                  @"The Gestalt Pattern",@"option3",
+                                  @"The Waffle Pattern",@"option4",
+                                  @"1",@"answer", nil];
+    
+    NSDictionary *questionDic6 = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                  @"main and NSLog are examples of",@"question",
+                                  @"Classes",@"option1",
+                                  @"Functions",@"option2",
+                                  @"Methods",@"option3",
+                                  @"Messages",@"option4",
+                                  @"2",@"answer", nil];
+    
+    NSDictionary *questionDic7 = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                  @"The line\nid <Painting> myObject;\nSays",@"question",
+                                  @"MyObject is part of the Painting category",@"option1",
+                                  @"MyObject conforms to the Painting category",@"option2",
+                                  @"MyObject conforms to the Painting protocol",@"option3",
+                                  @"Is not valid Objective-C syntax",@"option4",
+                                  @"3",@"answer", nil];
+    
+    NSDictionary *questionDic8 = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                  @"11^5\nWhat does the operation shown above procedure?",@"question",
+                                  @"6",@"option1",
+                                  @"14",@"option2",
+                                  @"-11",@"option3",
+                                  @"-14",@"option4",
+                                  @"2",@"answer", nil];
+    
+    NSDictionary *questionDic9 = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                  @"int x = 2 * 3 + 4 * 5;\nWhat value will x contain in the sample code above?",@"question",
+                                  @"22",@"option1",
+                                  @"26",@"option2",
+                                  @"46",@"option3",
+                                  @"50",@"option4",
+                                  @"2",@"answer", nil];
+    
+    NSDictionary *questionDic10 = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                  @"main(){\nint c=--2;\nprinf(\"c=%d\",c);\n}",@"question",
+                                  @"c=-2",@"option1",
+                                  @"c=2",@"option2",
+                                  @"garbage",@"option3",
+                                  @"error",@"option4",
+                                  @"4",@"answer", nil];
+    
+    NSMutableArray *questionsArray = [[NSMutableArray alloc]initWithObjects:questionDic1,questionDic2,questionDic3,questionDic4,questionDic5,questionDic6,questionDic7,questionDic8,questionDic9,questionDic10, nil];
+    
+    return questionsArray;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
